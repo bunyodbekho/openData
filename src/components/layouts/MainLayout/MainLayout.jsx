@@ -1,142 +1,209 @@
-import { Flex, Heading, Text, Link, Center, Divider } from "@chakra-ui/react";
-import Header from "../../Header/Header";
-import { colors } from "../../../constants/constants";
-import React, { useState, useCallback } from "react";
-import { BarChart, Bar, Cell } from "recharts";
+import { Flex, Heading, Grid } from "@chakra-ui/react";
+import React, { useState } from "react";
+import Search from "../../Search/Search";
+import Sections from "../../Sections/Sections";
+import DisplayProgress from "../../DisplayProgress/DisplayProgress";
+import DataInfo from "../../DataInfo/DataInfo";
+import {
+  territoryData,
+  healthcareData,
+  educationData,
+  transportationData,
+  ecologyData,
+  populationData,
+  agricultureData,
+  aralData,
+} from "../../../constants/constants";
 
-const iconStyles = {
-  color: colors.txtGolden,
-  fontSize: "80px",
-};
-
-const data = [
+const blue = [
   {
-    name: "0-14",
-    uv: 200,
+    header:
+      "The list of certified professionals applying for participation in the field of conformity assessment as a staff",
+    numData: "6347",
+    value: 90,
   },
   {
-    name: "15-19",
-    uv: 400,
+    header: "Purchase Plan List",
+    numData: "5185",
+    value: 90,
   },
   {
-    name: "20-24",
-    uv: 820,
+    header: "Information on existing vacancies",
+    numData: "3890",
+    value: 90,
   },
   {
-    name: "25-30",
-    uv: 440,
+    header: "List of extremist organizations",
+    numData: "3571",
+    value: 90,
   },
   {
-    name: "31-34",
-    uv: 140,
-  },
-  {
-    name: "35+",
-    uv: 160,
+    header:
+      "Register of licenses for the commercial transportation of passengers and goods by road on urban, suburban, intercity and international routes",
+    numData: "3099",
+    value: 90,
   },
 ];
 
-export default function MainLayout() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const activeItem = data[activeIndex];
+const red = [
+  { header: "MASS MEDIA", numData: "6759", value: 33 },
+  { header: "Personal goals", numData: "32096", value: 95 },
+  { header: "Application Development", numData: "6383", value: 30 },
+  { header: "Research work", numData: "29865", value: 80 },
+  { header: "Other", numData: "23668", value: 70 },
+];
 
-  const handleClick = useCallback(
-    (entry, index) => {
-      setActiveIndex(index);
-    },
-    [setActiveIndex]
-  );
+export default function MainLayout() {
+  const [curSection, setCurSection] = useState("");
 
   return (
-    <Flex flexDirection={"column"}>
-      {/* Header */}
-      <Header />
+    <Flex
+      flexDirection={"column"}
+      alignItems={"center"}
+      padding={"90px 80px"}
+      gap={"40px"}
+      bg={"#f2f4f7"}
+    >
+      <Heading color={"#3369c7"} size={"3xl"}>
+        Easy to use Open Data platform!
+      </Heading>
+      <Search />
+      <Sections setCurSection={setCurSection} />
 
-      {/* Section - Main */}
-      <Flex
-        justifyContent={"center"}
-        alignItems={"center"}
-        bgImage={"./src/assets/main-section.jpg"}
-        bgRepeat={"no-repeat"}
-        bgSize={"cover"}
-        bgPosition={"center"}
-        h={"600px"}
-      >
-        <Heading as={"h2"} color={"#fff"} textAlign={"center"}>
-          <Text as={("u", "i")}>
-            <Link>Join OpenData!</Link>
-          </Text>
-          <br /> Your Opinion Is Important
-        </Heading>
-      </Flex>
+      <Heading color={"#3369c7"}>{curSection}</Heading>
+      {curSection === "Territory" &&
+        territoryData.map((data) => {
+          return (
+            <DataInfo
+              date={data.date}
+              owner={data.owner}
+              name={data.name}
+              id={data.id}
+              number={data.number}
+              organisation={data.organisation}
+              email={data.email}
+              key={data.id}
+            />
+          );
+        })}
+      {curSection === "Healthcare" &&
+        healthcareData.map((data) => {
+          return (
+            <DataInfo
+              date={data.date}
+              owner={data.owner}
+              name={data.name}
+              id={data.id}
+              number={data.number}
+              organisation={data.organisation}
+              email={data.email}
+              key={data.id}
+            />
+          );
+        })}
+      {curSection === "Education" &&
+        educationData.map((data) => {
+          return (
+            <DataInfo
+              date={data.date}
+              owner={data.owner}
+              name={data.name}
+              id={data.id}
+              number={data.number}
+              organisation={data.organisation}
+              email={data.email}
+              key={data.id}
+            />
+          );
+        })}
+      {curSection === "Transportation" &&
+        transportationData.map((data) => {
+          return (
+            <DataInfo
+              date={data.date}
+              owner={data.owner}
+              name={data.name}
+              id={data.id}
+              number={data.number}
+              organisation={data.organisation}
+              email={data.email}
+              key={data.id}
+            />
+          );
+        })}
+      {curSection === "Ecology" &&
+        ecologyData.map((data) => {
+          return (
+            <DataInfo
+              date={data.date}
+              owner={data.owner}
+              name={data.name}
+              id={data.id}
+              number={data.number}
+              organisation={data.organisation}
+              email={data.email}
+              key={data.id}
+            />
+          );
+        })}
+      {curSection === "Population" &&
+        populationData.map((data) => {
+          return (
+            <DataInfo
+              date={data.date}
+              owner={data.owner}
+              name={data.name}
+              id={data.id}
+              number={data.number}
+              organisation={data.organisation}
+              email={data.email}
+              key={data.id}
+            />
+          );
+        })}
+      {curSection === "Agriculture" &&
+        agricultureData.map((data) => {
+          return (
+            <DataInfo
+              date={data.date}
+              owner={data.owner}
+              name={data.name}
+              id={data.id}
+              number={data.number}
+              organisation={data.organisation}
+              email={data.email}
+              key={data.id}
+            />
+          );
+        })}
+      {curSection === "Aral Sea region" &&
+        aralData.map((data) => {
+          return (
+            <DataInfo
+              date={data.date}
+              owner={data.owner}
+              name={data.name}
+              id={data.id}
+              number={data.number}
+              organisation={data.organisation}
+              email={data.email}
+              key={data.id}
+            />
+          );
+        })}
 
-      {/* Section - 1 */}
-      <Flex bg={colors.bgSecondary} padding={"0 50px"}>
-        <Flex
-          flexDirection={"column"}
-          gap={"20px"}
-          w={"50%"}
-          alignItems={"center"}
-          bg={colors.bgMain}
-          padding={"30px"}
-        >
-          <Heading color={colors.txtGolden} fontSize={"40px"}>
-            Overall Statistics
-          </Heading>
-          <Flex alignItems={"center"} gap={"5px"}>
-            <Text color={colors.txtWhite} fontSize={"40px"} as={"b"}>
-              169 835
-            </Text>
-            <Divider orientation="vertical" color={colors.txtWhite} />
-            <Text color={colors.txtGolden} fontSize={"30px"}>
-              Reporters this year
-            </Text>
-          </Flex>
-          <Flex gap={"30px"}>
-            <Flex gap={"20px"}>
-              <Flex flexDirection={"column"} alignItems={"center"}>
-                <i style={iconStyles} className="fa-solid fa-child-dress"></i>
-                <Text color={colors.txtWhite} as={"b"} fontSize={"30px"}>
-                  56%
-                </Text>
-                <Text color={colors.txtGolden} as={"b"}>
-                  58 695
-                </Text>
-              </Flex>
-              <Flex flexDirection={"column"} alignItems={"center"}>
-                <i style={iconStyles} className="fa-solid fa-child"></i>
-                <Text color={colors.txtWhite} as={"b"} fontSize={"30px"}>
-                  44%
-                </Text>
-                <Text color={colors.txtGolden} as={"b"}>
-                  46 698
-                </Text>
-              </Flex>
-            </Flex>
-            <Flex color={colors.txtWhite} flexDirection={"column"}>
-              <BarChart width={300} height={100} data={data}>
-                <Bar dataKey="uv" onClick={handleClick}>
-                  {data.map((entry, index) => (
-                    <Cell
-                      cursor="pointer"
-                      fill={
-                        index === activeIndex
-                          ? colors.txtWhite
-                          : colors.txtGolden
-                      }
-                      key={`cell-${index}`}
-                    />
-                  ))}
-                </Bar>
-              </BarChart>
-              <p className="content">{`Participation of "${activeItem.name}": ${
-                activeItem.uv / 20
-              }%`}</p>
-            </Flex>
-          </Flex>
-        </Flex>
-        <Center></Center>
-      </Flex>
+      <Grid templateColumns={"1fr 1fr"} gap={"30px"}>
+        <DisplayProgress
+          heading={"Frequently used datasets"}
+          color={"blue"}
+          dataset={blue}
+        />
+        <DisplayProgress
+          heading={"Scope of application"}
+          color={"red"}
+          dataset={red}
+        />
+      </Grid>
     </Flex>
   );
 }
