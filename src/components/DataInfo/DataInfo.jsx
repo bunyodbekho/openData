@@ -59,6 +59,7 @@ export default function DataInfo({
             email={email}
             date={date}
             owner={owner}
+            onClose={onClose}
           />
         </ModalContent>
       </Modal>

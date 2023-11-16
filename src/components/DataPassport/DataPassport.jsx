@@ -1,4 +1,12 @@
-import { Divider, Flex, Heading, Text } from "@chakra-ui/react";
+import {
+  Divider,
+  Flex,
+  Heading,
+  Text,
+  Textarea,
+  Button,
+  useToast,
+} from "@chakra-ui/react";
 
 export default function DataPassport({
   id,
@@ -8,7 +16,20 @@ export default function DataPassport({
   number,
   email,
   date,
+  onClose,
 }) {
+  const toast = useToast();
+  const handleSubmit = () => {
+    toast({
+      title: "Comment added",
+      description: "",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+    onClose();
+  };
+
   function PassportComp({ heading, children }) {
     return (
       <Flex flexDirection={"column"} gap={"20px"} mt={"20px"}>
@@ -48,6 +69,12 @@ export default function DataPassport({
       </PassportComp>
       <PassportComp heading={"Date of the first published dataset"}>
         <Text fontSize={"lg"}>{date}</Text>
+      </PassportComp>
+      <PassportComp heading={"Comments:"}>
+        <Textarea placeholder="Add your comment..." />
+        <Button colorScheme="blue" w={"100px"} onClick={handleSubmit}>
+          Submit
+        </Button>
       </PassportComp>
     </Flex>
   );
